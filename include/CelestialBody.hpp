@@ -3,7 +3,6 @@
 
 /**
  * Represents a celestial body (planet, asteroid...) that can exert gravitational influence on another body.
- * Immutable object.
  */
 class CelestialBody
 {
@@ -14,7 +13,7 @@ class CelestialBody
     double getGravitationalParameter();
     
     private:
-    const double mu; // Gravitational constant (km^3/s^2)
+    double mu; // Gravitational constant (km^3/s^2)
 };
 
 #endif
