@@ -24,12 +24,12 @@ class Ephemeris
     Ephemeris& operator=(Ephemeris&& source);
 
     /// @return the number of EphemerisEntrys
-    size_t size();
+    unsigned int size();
 
     /** @return Read/write reference to entry.
      *  @throw std::out_of_range If @param n is an invalid index.
      */
-    EphemerisEntry& at(size_t n);
+    EphemerisEntry& at(unsigned int n);
 
     /** @return EphemerisEntry that represents a moment in time
      * closest to the given time @param t
@@ -44,7 +44,7 @@ class Ephemeris
      * Inserts the @param entry into the Ephemeris at an appropiate position
      * @return the index of the introduced object
      */ 
-    size_t include(EphemerisEntry entry);
+    unsigned int include(EphemerisEntry entry);
 
     /// Removes all EphemerisEntry and includes this EphemerisEntry
     void setInitialEntry(EphemerisEntry entry);
@@ -69,19 +69,19 @@ class EphemerisEntry
      : x(x), y(y), z(z), vx(vx), vy(vy), vz(vz), t(t) {};
 
     /// @return x-coordinate of position in km
-    double getX();
+    double getX() const;
     /// @return y-coordinate of position in km
-    double getY();
+    double getY() const;
     /// @return z-coordinate of position in km
-    double getZ();
+    double getZ() const;
     /// @return x-coordinate of velocity in km/s
-    double getVx();
+    double getVx() const;
     /// @return y-coordinate of velocity in km/s
-    double getVy();
+    double getVy() const;
     /// @return z-coordinate of velocity in km/s
-    double getVz();
+    double getVz() const;
     /// @return reference time in seconds
-    double getTime();
+    double getTime() const;
 
     private:
     const double x,y,z,vx,vy,vz,t;

@@ -10,7 +10,7 @@ class CelestialBody
     CelestialBody(double mu) : mu(mu) {};
 
     /// @return Standard Gravitational Parameter of body in km^3/s^2
-    double getGravitationalParameter();
+    double getGravitationalParameter() const;
     
     private:
     double mu; // Gravitational constant (km^3/s^2)
