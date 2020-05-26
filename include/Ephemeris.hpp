@@ -1,6 +1,7 @@
 #ifndef EPHEMERIS_HPP
 #define EPHEMERIS_HPP
 
+#include "CelestialBody.hpp"
 #include <vector>
 #include <experimental/optional>
 
@@ -91,7 +92,7 @@ class EphemerisEntryBuilder
     public:
     EphemerisEntryBuilder() {};
     /// Initializes builder with data from entry
-    EphemerisEntryBuilder(EphemerisEntry initialEntry);
+    EphemerisEntryBuilder(EphemerisEntry initialEntry, CelestialBody referenceBody);
 
     /// Set x-coordinate of position in km
     void setX(double x);
@@ -122,6 +123,9 @@ class EphemerisEntryBuilder
     /// Set reference time in seconds
     void setTime(double t);
 
+    /// Set reference celestial body
+    void setCelestialBody(CelestialBody referenceBody);
+
     /// @return true iff ephemeris is fully defined 
     bool isValid();
 
@@ -133,8 +137,9 @@ class EphemerisEntryBuilder
 
     private:
     optional<double> x,y,z,vx,vy,vz,
-                          a,e,i,lonAscNode,argPeriap,anom,
-                          t;
+                     a,e,i,lonAscNode,argPeriap,anom,
+                     t;
+    optional<CelestialBody> referenceBody;
     bool settingCartesian {true};
 };
 
