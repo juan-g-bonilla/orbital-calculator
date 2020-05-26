@@ -25,13 +25,19 @@ class Ephemeris
     /// @return the number of EphemerisEntrys
     size_t size();
 
-    /// @return EphemerisEntry at position @param n
+    /** @return Read/write reference to entry.
+     *  @throw std::out_of_range If @param n is an invalid index.
+     */
     EphemerisEntry& at(size_t n);
 
     /** @return EphemerisEntry that represents a moment in time
      * closest to the given time @param t
+     * @throw std::out_of_range If ephemeris is empty
      */
     EphemerisEntry& when(double t);
+
+    /// @return true iff there are no entries
+    bool empty();
 
     /**
      * Inserts the @param entry into the Ephemeris at an appropiate position
