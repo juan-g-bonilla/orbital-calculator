@@ -129,7 +129,7 @@ MVector MVector::operator*(MVector& other)
     return std::move(result);
 }
 
-MVector MVector::operator^(MVector& other)
+MVector MVector::operator%(MVector& other)
 {
     if (_size != other._size || _size != 3)
         throw std::invalid_argument("Vectors size must be 3");
@@ -139,6 +139,22 @@ MVector MVector::operator^(MVector& other)
     result[1] = (*this)[2]*other[0] - (*this)[0]*other[2];
     result[2] = (*this)[0]*other[1] - (*this)[1]*other[0];
 
+    return std::move(result);
+}
+
+MVector MVector::operator*(double multiplier)
+{
+    MVector result(_size, false);
+    for (int i = 0; i < _size; i++)
+        result[i] = (*this)[i] * multiplier;
+    return std::move(result);
+}
+
+MVector MVector::operator/(double divider)
+{
+    MVector result(_size, false);
+    for (int i = 0; i < _size; i++)
+        result[i] = (*this)[i] / divider;
     return std::move(result);
 }
 
@@ -160,6 +176,19 @@ double MVector::norm()
 unsigned int MVector::size()
 {
     return _size;
+}
+
+MVector operator*(double multiplier, MVector& v)
+{
+    return std::move(v*multiplier);
+}
+
+MVector operator/(double divided, MVector& v)
+{
+    MVector result(v.size());
+    for (int i = 0; i < v.size(); i++)
+        result[i] = divided / v[i];
+    return std::move(result);
 }
 
 std::ostream &operator<<(std::ostream &os, MVector &v)
