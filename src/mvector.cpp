@@ -180,7 +180,7 @@ double& MVector::operator[](const unsigned int n) const
 
 double MVector::norm() const
 {
-    double result;
+    double result{0};
     for (int i = 0; i < _size; i++)
     {
         result += pow(data[i],2);
