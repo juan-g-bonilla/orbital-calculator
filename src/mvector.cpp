@@ -79,12 +79,12 @@ MVector& MVector::operator=(MVector&& source)
     return *this;
 }
 
-MVector MVector::operator+()
+MVector MVector::operator+() const
 {
     return *this;
 }
 
-MVector MVector::operator+(MVector& other)
+MVector MVector::operator+(const MVector& other) const
 {
     if (_size != other._size)
         throw std::invalid_argument("Vector size must coincide");
@@ -96,7 +96,7 @@ MVector MVector::operator+(MVector& other)
     return std::move(result);
 }
 
-MVector MVector::operator-()
+MVector MVector::operator-() const
 {
     MVector result(_size, false);
     for (int i = 0; i < _size; i++)
@@ -105,7 +105,7 @@ MVector MVector::operator-()
     return std::move(result);
 }
 
-MVector MVector::operator-(MVector& other)
+MVector MVector::operator-(const MVector& other) const
 {
     if (_size != other._size)
         throw std::invalid_argument("Vector size must coincide");
@@ -117,7 +117,7 @@ MVector MVector::operator-(MVector& other)
     return std::move(result);
 }
 
-MVector MVector::operator*(MVector& other)
+MVector MVector::operator*(const MVector& other) const
 {
     if (_size != other._size)
         throw std::invalid_argument("Vector size must coincide");
@@ -129,7 +129,7 @@ MVector MVector::operator*(MVector& other)
     return std::move(result);
 }
 
-MVector MVector::operator%(MVector& other)
+MVector MVector::operator%(const MVector& other) const
 {
     if (_size != other._size || _size != 3)
         throw std::invalid_argument("Vectors size must be 3");
@@ -142,7 +142,7 @@ MVector MVector::operator%(MVector& other)
     return std::move(result);
 }
 
-MVector MVector::operator*(double multiplier)
+MVector MVector::operator*(double multiplier) const
 {
     MVector result(_size, false);
     for (int i = 0; i < _size; i++)
@@ -150,7 +150,7 @@ MVector MVector::operator*(double multiplier)
     return std::move(result);
 }
 
-MVector MVector::operator/(double divider)
+MVector MVector::operator/(double divider) const
 {
     MVector result(_size, false);
     for (int i = 0; i < _size; i++)
@@ -158,12 +158,22 @@ MVector MVector::operator/(double divider)
     return std::move(result);
 }
 
-double& MVector::operator[](const unsigned int n)
+bool MVector::operator==(const MVector& other) const
+{
+    if (this->_size != other._size) return false;
+
+    for (int i = 0; i < _size; i++)
+        if ((*this)[i] != other[i]) return false;
+
+    return true;
+}
+
+double& MVector::operator[](const unsigned int n) const
 {
     return data[n];
 }
 
-double MVector::norm()
+double MVector::norm() const
 {
     double result;
     for (int i = 0; i < _size; i++)
@@ -173,17 +183,17 @@ double MVector::norm()
     return pow(result, 0.5);
 }
 
-unsigned int MVector::size()
+unsigned int MVector::size() const
 {
     return _size;
 }
 
-MVector operator*(double multiplier, MVector& v)
+MVector operator*(double multiplier, const MVector& v)
 {
     return std::move(v*multiplier);
 }
 
-MVector operator/(double divided, MVector& v)
+MVector operator/(double divided, const MVector& v)
 {
     MVector result(v.size());
     for (int i = 0; i < v.size(); i++)
@@ -191,7 +201,7 @@ MVector operator/(double divided, MVector& v)
     return std::move(result);
 }
 
-std::ostream &operator<<(std::ostream &os, MVector &v)
+std::ostream &operator<<(std::ostream &os, const MVector &v)
 { 
     for (int i = 0; i < v.size(); i++)
     {

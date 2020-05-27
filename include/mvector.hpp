@@ -22,35 +22,44 @@ class MVector
     MVector& operator=(MVector&& source);
 
     /// @return same vector
-    MVector operator+();
+    MVector operator+() const;
+
     /// @return sum of two vectors
-    MVector operator+(MVector& other);
+    MVector operator+(const MVector& other) const;
+
     /// @return vector with same magnitudes but opposite sign
-    MVector operator-();
+    MVector operator-() const;
+
     /// @return vector which is this - other elements
-    MVector operator-(MVector& other);
+    MVector operator-(const MVector& other) const;
+
     /// @return Dot product of two vectors
-    MVector operator*(MVector& other);
+    MVector operator*(const MVector& other) const;
+
     /** @return Cross product of two vectors
      *  @throw std::invalid_argument if either this or other is not size 3
      */
-    MVector operator%(MVector& other);
-
+    MVector operator%(const MVector& other) const;
+    
     /// @return vector multiplied by @param multiplier
-    MVector operator*(double multiplier);
+    MVector operator*(double multiplier) const;
+
     /// @return vector divided by @param divider
-    MVector operator/(double divider);
+    MVector operator/(double divider) const;
+
+    /// @return true iff all elements are equal
+    bool operator==(const MVector& other) const;
 
     /** @return access to number at index @param n
      *  @throw std::out_of_bounds
      */
-    double& operator[](const unsigned int n);
+    double& operator[](const unsigned int n) const;
 
     /// @return norm of vector
-    double norm();
+    double norm() const;
 
     /// @return size of the vector
-    unsigned int size();
+    unsigned int size() const;
 
     private:
     unsigned int _size;
@@ -61,10 +70,10 @@ class MVector
 };
 
 /// @return vector @param v multiplied by @param multiplier
-MVector operator*(double multiplier, MVector& v);
+MVector operator*(double multiplier, const MVector& v);
 /// @return @param divided divided by vector @param v
-MVector operator/(double divider, MVector& v);
+MVector operator/(double divider, const MVector& v);
 
-std::ostream &operator<<(std::ostream &os, MVector &v);
+std::ostream &operator<<(std::ostream &os, const MVector &v);
 
 #endif
