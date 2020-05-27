@@ -87,6 +87,8 @@ class EphemerisEntry
     double x,y,z,vx,vy,vz,t;
 };
 
+std::ostream &operator<<(std::ostream &os, const EphemerisEntry &e);
+
 class EphemerisEntryBuilder
 {
     public:
@@ -135,12 +137,19 @@ class EphemerisEntryBuilder
      */
     EphemerisEntry build();
 
+    /**
+     * User friendly output to stream @param os.
+     * If last element to be set was keplerian, then display keplerian elements
+     * otherwise display cartesian elements
+     */
+    void print(std::ostream &os);
+
     private:
     optional<double> x,y,z,vx,vy,vz,
                      a,e,i,lonAscNode,argPeriap,anom,
                      t;
     optional<CelestialBody> referenceBody;
-    bool settingCartesian {true};
+    bool settingCartesian {false};
 };
 
 #endif
