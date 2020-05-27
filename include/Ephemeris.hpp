@@ -84,7 +84,7 @@ class EphemerisEntry
     double getTime() const;
 
     private:
-    const double x,y,z,vx,vy,vz,t;
+    double x,y,z,vx,vy,vz,t;
 };
 
 class EphemerisEntryBuilder
