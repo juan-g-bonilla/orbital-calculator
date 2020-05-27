@@ -34,7 +34,7 @@ class MVector
     MVector operator-(const MVector& other) const;
 
     /// @return Dot product of two vectors
-    MVector operator*(const MVector& other) const;
+    double operator*(const MVector& other) const;
 
     /** @return Cross product of two vectors
      *  @throw std::invalid_argument if either this or other is not size 3
@@ -49,6 +49,9 @@ class MVector
 
     /// @return true iff all elements are equal
     bool operator==(const MVector& other) const;
+
+    /// @return false iff all elements are equal
+    bool operator!=(const MVector& other) const;
 
     /** @return access to number at index @param n
      *  @throw std::out_of_bounds

@@ -117,16 +117,16 @@ MVector MVector::operator-(const MVector& other) const
     return std::move(result);
 }
 
-MVector MVector::operator*(const MVector& other) const
+double MVector::operator*(const MVector& other) const
 {
     if (_size != other._size)
         throw std::invalid_argument("Vector size must coincide");
 
-    MVector result(_size, false);
+    double result{0};
     for (int i = 0; i < _size; i++)
-        result[i] = (*this)[i] * other[i];
+        result += (*this)[i] * other[i];
     
-    return std::move(result);
+    return result;
 }
 
 MVector MVector::operator%(const MVector& other) const
@@ -166,6 +166,11 @@ bool MVector::operator==(const MVector& other) const
         if ((*this)[i] != other[i]) return false;
 
     return true;
+}
+
+bool MVector::operator!=(const MVector& other) const
+{
+    return !(*this == other);
 }
 
 double& MVector::operator[](const unsigned int n) const
