@@ -1,4 +1,4 @@
-#include "mvector.hpp"
+#include "MVector.hpp"
 #include <cmath>
 
 using std::pow;

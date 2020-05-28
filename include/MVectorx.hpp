@@ -1,5 +1,5 @@
-#ifndef MATH_MVECTOR_HPP
-#define MATH_MVECTOR_HPP
+#ifndef MVECTOR_HPP
+#define MVECTOR_HPP
 
 #include <initializer_list>
 #include <stdexcept>
