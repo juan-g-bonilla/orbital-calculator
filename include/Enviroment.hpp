@@ -7,6 +7,7 @@
 
 class Enviroment
 {
+    public:
     CelestialBody& getCentralBody();
     Ephemeris& getEphemeris();
     /// Gets number of seconds for which we want to propagate orbit
