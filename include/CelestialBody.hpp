@@ -7,7 +7,7 @@
 class CelestialBody
 {
     public:
-    CelestialBody(double mu) : mu(mu) {};
+    CelestialBody(double mu);
 
     /// @return Standard Gravitational Parameter of body in km^3/s^2
     double getGravitationalParameter() const;
