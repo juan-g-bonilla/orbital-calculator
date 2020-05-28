@@ -39,7 +39,7 @@ void Enviroment::setFinalTime(double time)
     tf = time;
 }
 
-void Enviroment::setFinalTime(double time)
+void Enviroment::setTimeStep(double time)
 {
     if (time <= 0)
         throw std::invalid_argument("Time step must be higher than 0");

@@ -18,7 +18,7 @@ class Enviroment
     /// Sets number of seconds for which we want to propagate orbit
     void setFinalTime(double time);
     /// Sets time step in seconds
-    void setFinalTime(double time);
+    void setTimeStep(double time);
 
     private:
     CelestialBody centralBody;
