@@ -1,7 +1,8 @@
 #include "Ephemeris.hpp"
 #include <stdexcept>
 #include <cmath>
-#include "mvector.hpp"
+#include "MVector.hpp"
+
 #define M_PI 3.14159265358979323846  /* pi */
 
 using std::pow;
