@@ -3,6 +3,7 @@
 
 #include "CelestialBody.hpp"
 #include "Ephemeris.hpp"
+#include "MVector.hpp"
 
 class Enviroment
 {
@@ -19,6 +20,12 @@ class Enviroment
     void setFinalTime(double time);
     /// Sets time step in seconds
     void setTimeStep(double time);
+
+    /** Get the acceleration the orbiting body suffers in the position
+     *  defined by @param currentPosition, in km/s^2 and stored in a 
+     *  3 size vector
+     */
+    MVector getAcceleration(EphemerisEntry currentPosition);
 
     private:
     CelestialBody centralBody;
