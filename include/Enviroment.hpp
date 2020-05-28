@@ -29,7 +29,7 @@ class Enviroment
     MVector getAcceleration(EphemerisEntry currentPosition);
 
     private:
-    CelestialBody centralBody;
+    CelestialBody centralBody{0};
     Ephemeris ephemeris;
     double tf{0}, dt{0};
 };
