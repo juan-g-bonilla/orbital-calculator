@@ -83,15 +83,14 @@ class EphemerisEntry
     /// @return reference time in seconds
     double getTime() const;
 
-    /// Outputs to @param os the entry in a user friendly way
-    std::ostream& verboseOutput(std::ostream &os);
+    /** Outputs to @param os the contents of the entry.
+     *  @param verbose wheter to print in a friendly way or in one line
+     */
+    std::ostream& output(std::ostream &os, bool verbose);
 
     private:
     double x,y,z,vx,vy,vz,t;
 };
-
-/// Outputs to @param os the entry in one line, perfect for files
-std::ostream &operator<<(std::ostream &os, const EphemerisEntry &e);
 
 class EphemerisEntryBuilder
 {
@@ -146,7 +145,7 @@ class EphemerisEntryBuilder
      * If last element to be set was keplerian, then display keplerian elements
      * otherwise display cartesian elements
      */
-    void verboseOutput(std::ostream &os);
+    void output(std::ostream &os);
 
     private:
     optional<double> x,y,z,vx,vy,vz,

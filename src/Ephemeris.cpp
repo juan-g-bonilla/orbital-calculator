@@ -136,25 +136,24 @@ double EphemerisEntry::getVy() const { return vy;}
 double EphemerisEntry::getVz() const { return vz;}
 double EphemerisEntry::getTime() const { return t;}
 
-std::ostream& EphemerisEntry::verboseOutput(std::ostream &os)
+std::ostream& EphemerisEntry::output(std::ostream &os, bool verbose)
 {
-    os << "x: " << getX() << " km" << std::endl;
-    os << "y: " << getY() << " km" << std::endl;
-    os << "z: " << getZ() << " km" << std::endl;
-    os << "vx: " << getVx() << " km/s" << std::endl;
-    os << "vy: " << getVy() << " km/s" << std::endl;
-    os << "vz: " << getVz() << " km/s" << std::endl;
-    os << "t: " << getTime() << " s" << std::endl;
-
-    return os;
-}
-
-
-std::ostream &operator<<(std::ostream &os, const EphemerisEntry &e)
-{
-    os << e.getTime() << "\t" 
-       << e.getX() << "\t" << e.getY() << "\t" << e.getZ() << "\t"
-       << e.getVx() << "\t" << e.getVy() << "\t" << e.getVz();
+    if (verbose)
+    {
+        os << "x: " << getX() << " km" << std::endl;
+        os << "y: " << getY() << " km" << std::endl;
+        os << "z: " << getZ() << " km" << std::endl;
+        os << "vx: " << getVx() << " km/s" << std::endl;
+        os << "vy: " << getVy() << " km/s" << std::endl;
+        os << "vz: " << getVz() << " km/s" << std::endl;
+        os << "t: " << getTime() << " s" << std::endl;
+    }
+    else
+    {
+        os << getTime() << "\t" 
+        << getX() << "\t" << getY() << "\t" << getZ() << "\t"
+        << getVx() << "\t" << getVy() << "\t" << getVz();
+    }
 
     return os;
 }
@@ -300,7 +299,7 @@ EphemerisEntry EphemerisEntryBuilder::build()
     return {x.value(), y.value(), z.value(), vx.value(), vy.value(), vz.value(), t.value()};
 }
 
-void EphemerisEntryBuilder::verboseOutput(std::ostream &os)
+void EphemerisEntryBuilder::output(std::ostream &os)
 {
     if (settingCartesian)
     {
