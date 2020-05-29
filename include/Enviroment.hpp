@@ -15,6 +15,7 @@ class Enviroment
     double getFinalTime();
     /// Gets time step in seconds
     double getTimeStep();
+    EphemerisEntryBuilder& getEphemerisEntryBuilder();
 
     void setCentralBody(CelestialBody central);
     void setEphemeris(Ephemeris ephemeris);
@@ -32,6 +33,7 @@ class Enviroment
     private:
     CelestialBody centralBody{0};
     Ephemeris ephemeris{};
+    EphemerisEntryBuilder builder{};
     double tf{0}, dt{0};
 };
 

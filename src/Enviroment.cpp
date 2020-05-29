@@ -22,6 +22,12 @@ double Enviroment::getTimeStep()
     return dt;
 }
 
+EphemerisEntryBuilder& Enviroment::getEphemerisEntryBuilder()
+{
+    return builder;
+}
+
+
 void Enviroment::setCentralBody(CelestialBody central)
 {
     centralBody = central;
