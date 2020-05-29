@@ -156,7 +156,7 @@ std::ostream& EphemerisEntry::output(std::ostream &os, bool verbose)
         os << "vx: " << getVx() << " km/s" << std::endl;
         os << "vy: " << getVy() << " km/s" << std::endl;
         os << "vz: " << getVz() << " km/s" << std::endl;
-        os << "t: " << getTime() << " s" << std::endl;
+        os << "t: " << getTime() << " s";
     }
     else
     {
@@ -366,5 +366,5 @@ void EphemerisEntryBuilder::output(std::ostream &os)
 
     os << "Reference Time: ";
     if (t) os << t.value() << " seconds"; else os << "NaN";
-    os << std::endl;
+    // os << std::endl;
 }
