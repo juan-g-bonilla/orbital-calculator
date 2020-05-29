@@ -17,6 +17,7 @@ class EphemerisEntry;
 class Ephemeris
 {
     public:
+    Ephemeris() {};
     ~Ephemeris() {};
     Ephemeris(const Ephemeris &source);
     Ephemeris& operator=(const Ephemeris& source);
