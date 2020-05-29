@@ -8,6 +8,7 @@
 class Enviroment
 {
     public:
+    Enviroment() {};
     CelestialBody& getCentralBody();
     Ephemeris& getEphemeris();
     /// Gets number of seconds for which we want to propagate orbit
@@ -30,7 +31,7 @@ class Enviroment
 
     private:
     CelestialBody centralBody{0};
-    Ephemeris ephemeris;
+    Ephemeris ephemeris{};
     double tf{0}, dt{0};
 };
 
