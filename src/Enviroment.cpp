@@ -52,5 +52,5 @@ void Enviroment::setTimeStep(double time)
 MVector Enviroment::getAcceleration(EphemerisEntry entry)
 {
     MVector r = {entry.getX(), entry.getY(), entry.getZ()};
-    return -std::pow(centralBody.getGravitationalParameter()/r.norm(),3)*r;
+    return -centralBody.getGravitationalParameter()/std::pow(r.norm(),3)*r;
 }
