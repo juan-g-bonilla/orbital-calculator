@@ -55,6 +55,12 @@ class Ephemeris
     /// Removes all EphemerisEntry, including the initial position.
     void clear();
 
+    /** Outputs to @param os the contents of the whole ephemeris.
+     *  @param verbose whether to print each entry in a user friendly
+     *  way or each entry in one line
+     */
+    std::ostream& output(std::ostream &os, bool verbose);
+
     private:
     vector<EphemerisEntry> entries;
 };
@@ -84,7 +90,7 @@ class EphemerisEntry
     double getTime() const;
 
     /** Outputs to @param os the contents of the entry.
-     *  @param verbose wheter to print in a friendly way or in one line
+     *  @param verbose whether to print in a friendly way or in one line
      */
     std::ostream& output(std::ostream &os, bool verbose);
 

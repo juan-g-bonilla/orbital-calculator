@@ -121,6 +121,16 @@ void Ephemeris::reset()
     setInitialEntry(initial);
 }
 
+std::ostream& Ephemeris::output(std::ostream &os, bool verbose)
+{
+    for (auto ent : entries)
+    {
+        ent.output(os, verbose) << std::endl;
+    }
+
+    return os;
+}
+
 void Ephemeris::clear()
 {
     entries.clear();
