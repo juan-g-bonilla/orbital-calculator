@@ -74,6 +74,7 @@ class EphemerisEntry
     public:
     EphemerisEntry(double x, double y, double z, double vx, double vy, double vz, double t)
      : x(x), y(y), z(z), vx(vx), vy(vy), vz(vz), t(t) {};
+    EphemerisEntry() : EphemerisEntry(0,0,0,0,0,0,0) {}; 
 
     /// @return x-coordinate of position in km
     double getX() const;
