@@ -27,6 +27,11 @@ EphemerisEntryBuilder& Enviroment::getEphemerisEntryBuilder()
     return builder;
 }
 
+Propagator* Enviroment::getPropagator()
+{
+    return propagator.get();
+}
+
 
 void Enviroment::setCentralBody(CelestialBody central)
 {
@@ -54,9 +59,19 @@ void Enviroment::setTimeStep(double time)
     dt = time;
 }
 
+void Enviroment::setPropagator(std::unique_ptr<Propagator>&& propagator)
+{
+    this->propagator = std::move(propagator);
+}
+
 // Current implementation is two-body
 MVector Enviroment::getAcceleration(EphemerisEntry entry)
 {
     MVector r = {entry.getX(), entry.getY(), entry.getZ()};
     return -centralBody.getGravitationalParameter()/std::pow(r.norm(),3)*r;
+}
+
+int Enviroment::propagate()
+{
+    return propagator->propagate(*this);
 }
