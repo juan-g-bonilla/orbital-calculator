@@ -53,3 +53,15 @@ of Ephemeris (which is user defined) and the time step and final time of the pro
 * EphemerisEntryBuilder allows defining the initial entry of the Ephemeris (ie the initial position of orbiting body).
 * Additionally, there is a util math class MVector which represents a vector in  the mathematical sense of the word which 
 implements useful operators for linear algebra operations
+
+## Requirements met
+* The project reads data from a file and process the data, or the program writes data to a file: ConsoleHandler.cpp::251
+* The project accepts user input and processes the input: ConsoleHandler.cpp::309
+* Class constructors utilize member initialization lists: Ephemeris.hpp::75
+* Classes abstract implementation details from their interfaces: MVector.hpp
+* Classes follow an appropriate inheritance hierarchy: Propagator.hpp
+* Derived class functions override virtual base class functions: Propagator.hpp::34
+* The project uses destructors appropriately: MVector.cpp::36
+* The project uses scope / Resource Acquisition Is Initialization (RAII) where appropriate: MVector.cpp::6
+* The project follows the Rule of 5: MVector.hpp::18
+* The project uses smart pointers instead of raw pointers: Enviroment.hpp::51
