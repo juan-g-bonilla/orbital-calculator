@@ -9,6 +9,7 @@ class CelestialBody
     public:
     CelestialBody(double mu);
 
+    ///Sets Standard Gravitational Parameter of body in km^3/s^2
     void setGravitationalParameter(double mu);
     /// @return Standard Gravitational Parameter of body in km^3/s^2
     double getGravitationalParameter() const;
