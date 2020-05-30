@@ -102,7 +102,7 @@ class EphemerisEntry
 class EphemerisEntryBuilder
 {
     public:
-    EphemerisEntryBuilder() {};
+    EphemerisEntryBuilder() : t(0) {};
     /// Initializes builder with data from entry
     EphemerisEntryBuilder(EphemerisEntry initialEntry, CelestialBody referenceBody);
 
