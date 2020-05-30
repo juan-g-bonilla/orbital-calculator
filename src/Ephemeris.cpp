@@ -51,24 +51,25 @@ EphemerisEntry&  Ephemeris::at(size_t n)
 
 EphemerisEntry& Ephemeris::when(double t)
 {
-    if (t < entries.at(0).getTime()) return entries.at(0);
+    if (entries.size() < 2)
+        throw std::invalid_argument("Ephemeris has not been computed yet");
 
-    for (int i = 0; i < entries.size(); i++)
+    for (int i = 1; i < entries.size(); i++)
     {
-        if (entries.at(i).getTime() > t)
+        if (entries.at(i).getTime() >= t)
         {
-            if (i == entries.size()-1) return entries.at(i);
-
-            if (t - entries.at(i).getTime() > entries.at(i+1).getTime() - t)
-            {
-                return entries.at(i+1);
-            }
-            else
+            if ((t - entries.at(i-1).getTime()) > (entries.at(i).getTime() - t))
             {
                 return entries.at(i);
             }
+            else
+            {
+                return entries.at(i-1);
+            }
         }
     }
+
+    return entries.back();
 }
 
 bool Ephemeris::empty()
