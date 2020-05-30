@@ -2,6 +2,24 @@
 
 Calculator for propagating orbits of bodies around a central body following two-body physics.
 
+## Usage 
+You can use the command "help" to see all available commands and obtain information about them.
+A simple use case involves setting the initial coordinates of the body with the command ("initial coord"),
+setting the gravitational parameter of the central body ("central grav"), how many seconds we want to compute
+("env tf") and the time step ("env dt"). Then propagate using ("propagate"). 
+To look up the results at a specific time use ("results at"). To output the results to a file use ("results to file").
+
+Example:
+'''
+initial coord 9222.33 1408.28 813.073 -1.291 6.344 3.663
+central grav 398601
+env tf 100
+env dt 0.5
+propagate
+results at 62.5
+results to file "example.txt"
+'''
+
 ## Dependencies for Running Locally
 * cmake >= 3.7
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
