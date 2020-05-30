@@ -3,11 +3,291 @@
 #include <stdexcept>
 #include <limits>
 #include <ios>
+#include <fstream>
 
 /* ConsoleHandler */
 ConsoleHandler::ConsoleHandler(Enviroment& env, std::istream& input, std::ostream& output) 
 : env(env), input(input), output(output) 
 {
+    emplace("initial x", {NUMBER}, "Sets initial x-coordinate of orbiting body in km",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            env.getEphemerisEntryBuilder().setX(args[0].getNumber());
+            if (env.getEphemerisEntryBuilder().isValid())
+            {
+                env.getEphemeris().setInitialEntry(env.getEphemerisEntryBuilder().build());
+                return "Initial conditions are now fully defined";
+            }
+            else return "Coordinate set";
+        });
+
+    emplace("initial y", {NUMBER}, "Sets initial y-coordinate of orbiting body in km",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            env.getEphemerisEntryBuilder().setY(args[0].getNumber());
+            if (env.getEphemerisEntryBuilder().isValid())
+            {
+                env.getEphemeris().setInitialEntry(env.getEphemerisEntryBuilder().build());
+                return "Initial conditions are now fully defined";
+            }
+            else return "Coordinate set";
+        });
+
+    emplace("initial z", {NUMBER}, "Sets initial z-coordinate of orbiting body in km",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            env.getEphemerisEntryBuilder().setZ(args[0].getNumber());
+            if (env.getEphemerisEntryBuilder().isValid())
+            {
+                env.getEphemeris().setInitialEntry(env.getEphemerisEntryBuilder().build());
+                return "Initial conditions are now fully defined";
+            }
+            else return "Coordinate set";
+        });
+
+    emplace("initial vx", {NUMBER}, "Sets initial x-coordinate of velocity of orbiting body in km/s",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            env.getEphemerisEntryBuilder().setVx(args[0].getNumber());
+            if (env.getEphemerisEntryBuilder().isValid())
+            {
+                env.getEphemeris().setInitialEntry(env.getEphemerisEntryBuilder().build());
+                return "Initial conditions are now fully defined";
+            }
+            else return "Coordinate set";
+        });
+
+    emplace("initial vy", {NUMBER}, "Sets initial y-coordinate of velocity of orbiting body in km/s",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            env.getEphemerisEntryBuilder().setVy(args[0].getNumber());
+            if (env.getEphemerisEntryBuilder().isValid())
+            {
+                env.getEphemeris().setInitialEntry(env.getEphemerisEntryBuilder().build());
+                return "Initial conditions are now fully defined";
+            }
+            else return "Coordinate set";
+        });
+
+    emplace("initial vz", {NUMBER}, "Sets initial z-coordinate of velocity of orbiting body in km/s",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            env.getEphemerisEntryBuilder().setVz(args[0].getNumber());
+            if (env.getEphemerisEntryBuilder().isValid())
+            {
+                env.getEphemeris().setInitialEntry(env.getEphemerisEntryBuilder().build());
+                return "Initial conditions are now fully defined";
+            }
+            else return "Coordinate set";
+        });
+
+    emplace("initial coord", {NUMBER, NUMBER, NUMBER, NUMBER, NUMBER, NUMBER}, 
+        "Sets initial coordinates of orbiting body and velocity in km and km/s in this order: x, y, z, vx, vy, vz",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {   
+            env.getEphemerisEntryBuilder().setX(args[0].getNumber());
+            env.getEphemerisEntryBuilder().setY(args[1].getNumber());
+            env.getEphemerisEntryBuilder().setZ(args[2].getNumber());
+            env.getEphemerisEntryBuilder().setVx(args[3].getNumber());
+            env.getEphemerisEntryBuilder().setVy(args[4].getNumber());
+            env.getEphemerisEntryBuilder().setVz(args[5].getNumber());
+
+            if (env.getEphemerisEntryBuilder().isValid())
+            {
+                env.getEphemeris().setInitialEntry(env.getEphemerisEntryBuilder().build());
+                return "Initial conditions are now fully defined";
+            }
+            else return "Coordinate set";
+        });
+
+    emplace("initial a", {NUMBER}, "Sets initial semi-major axis of orbiting body in km",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            try
+            {
+                env.getEphemerisEntryBuilder().setA(args[0].getNumber());
+            }
+            catch(std::invalid_argument& ex)
+            {
+                return ex.what();
+            }
+
+            if (env.getEphemerisEntryBuilder().isValid())
+            {
+                env.getEphemeris().setInitialEntry(env.getEphemerisEntryBuilder().build());
+                return "Initial conditions are now fully defined";
+            }
+            else return "Element set";
+        });
+
+    emplace("initial e", {NUMBER}, "Sets initial eccentricity of orbiting body",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            try
+            {
+                env.getEphemerisEntryBuilder().setE(args[0].getNumber());
+            }
+            catch(std::invalid_argument& ex)
+            {
+                return ex.what();
+            }            
+            
+            if (env.getEphemerisEntryBuilder().isValid())
+            {
+                env.getEphemeris().setInitialEntry(env.getEphemerisEntryBuilder().build());
+                return "Initial conditions are now fully defined";
+            }
+            else return "Element set";
+        });
+
+    emplace("initial i", {NUMBER}, "Sets initial inclination axis of orbiting body in degrees",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            env.getEphemerisEntryBuilder().setA(args[0].getNumber());
+            if (env.getEphemerisEntryBuilder().isValid())
+            {
+                env.getEphemeris().setInitialEntry(env.getEphemerisEntryBuilder().build());
+                return "Initial conditions are now fully defined";
+            }
+            else return "Element set";
+        });
+
+    emplace("initial lon", {NUMBER}, "Sets initial longitude of ascending node of orbiting body in degrees",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            env.getEphemerisEntryBuilder().setLongitudeAscendingNode(args[0].getNumber());
+            if (env.getEphemerisEntryBuilder().isValid())
+            {
+                env.getEphemeris().setInitialEntry(env.getEphemerisEntryBuilder().build());
+                return "Initial conditions are now fully defined";
+            }
+            else return "Element set";
+        });
+
+    emplace("initial arg", {NUMBER}, "Sets initial argument of the perigee of orbiting body in degrees",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            env.getEphemerisEntryBuilder().setArgumentPerigee(args[0].getNumber());
+            if (env.getEphemerisEntryBuilder().isValid())
+            {
+                env.getEphemeris().setInitialEntry(env.getEphemerisEntryBuilder().build());
+                return "Initial conditions are now fully defined";
+            }
+            else return "Element set";
+        });
+
+    emplace("initial anom", {NUMBER}, "Sets true anomaly of orbiting body in degrees",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            env.getEphemerisEntryBuilder().setTrueAnomaly(args[0].getNumber());
+            if (env.getEphemerisEntryBuilder().isValid())
+            {
+                env.getEphemeris().setInitialEntry(env.getEphemerisEntryBuilder().build());
+                return "Initial conditions are now fully defined";
+            }
+            else return "Element set";
+        });
+
+    emplace("initial display", {}, "Displays the currently set parameters of initial conditions",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            std::stringstream stream;
+            env.getEphemerisEntryBuilder().output(stream);
+            return stream.str();
+        });
+
+    emplace("env tf", {NUMBER}, "Sets final reference time of the enviroment in seconds",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            try
+            {
+                env.setFinalTime(args[0].getNumber());
+            }
+            catch(std::invalid_argument& ex)
+            {
+                return ex.what();
+            }
+
+            return "Final time set";
+        });
+
+    emplace("env dt", {NUMBER}, "Sets time step of integration in seconds",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            try
+            {
+                env.setTimeStep(args[0].getNumber());
+            }
+            catch(std::invalid_argument& ex)
+            {
+                return ex.what();
+            }
+
+            return "Time step set";
+        });
+
+    emplace("central grav", {NUMBER}, "Sets standard gravitational paramater of the central body in km^3/s^2",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            try
+            {
+                env.getCentralBody().setGravitationalParameter(args[0].getNumber());
+            }
+            catch(std::invalid_argument& ex)
+            {
+                return ex.what();
+            }
+
+            return "Gravitational paramater set";
+        });
+
+    emplace("propagate", {}, "Propagates the orbit",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            int code = env.propagate();
+            return env.getPropagator()->getExitMessage(code);
+        });
+
+    emplace("results to file", {STRING}, "Sets position and velocity data of ephemeris in file with given name",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            std::ofstream file{args[0].getString(), std::ios::trunc};
+
+            if (file.is_open())
+            {
+                env.getEphemeris().output(file, false);
+                file.close();
+                return "Succesfully output results to file";
+            }
+
+            return "Unable to open file";
+        });
+
+    emplace("results at", {NUMBER}, "Outputs position and velocity data at closest time calculated to the console",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            EphemerisEntry entry;
+            try
+            {
+                entry = env.getEphemeris().when(args[0].getNumber());
+            }
+            catch(std::invalid_argument& ex)
+            {
+                std::string message{ex.what()};
+                return message;
+            }
+
+            std::stringstream ss;
+            entry.output(ss, true);
+            return ss.str();
+        });
+
+    emplace("results reset", {}, "Deletes propagated orbit",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {
+            env.getEphemeris().reset();
+            return "Deleted propagated orbit";
+        });
     
 }
 
@@ -43,7 +323,7 @@ void ConsoleHandler::startQuery()
                 s.pop_back();
                 args.emplace_back(CommArgType::STRING, s);
             }
-            else if (fC >= '0' && fC <= '9') // Is number
+            else if ((fC >= '0' && fC <= '9') || fC == '-') // Is number
             {
                 std::istringstream sstreamdouble(s);
                 double number;
