@@ -10,7 +10,7 @@ setting the gravitational parameter of the central body ("central grav"), how ma
 To look up the results at a specific time use ("results at"). To output the results to a file use ("results to file").
 
 Example:
-'''
+```
 initial coord 9222.33 1408.28 813.073 -1.291 6.344 3.663
 central grav 398601
 env tf 100
@@ -18,7 +18,7 @@ env dt 0.5
 propagate
 results at 62.5
 results to file "example.txt"
-'''
+```
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
