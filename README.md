@@ -1,6 +1,9 @@
 # Orbital Calculator
 
 Calculator for propagating orbits of bodies around a central body following two-body physics.
+The results obtainable from this program are a propagated Ephemeris (position and velocity) of
+an orbiting body given initial conditions. This results can be looked up at a specific instant of time
+or output completely to a file of further calculations.
 
 ## Usage 
 You can use the command "help" to see all available commands and obtain information about them.
@@ -38,3 +41,15 @@ results to file "example.txt"
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./OrbitalCalculator`.
+
+## File and class structure
+* ConsoleHandler stores an Enviroment variable and handles user input; command declaration and execution; 
+and console and file output. 
+* Enviroment class stores the enviroment central CelestialBody, orbiting body's 
+Ephemeris, a Propagator for the Ephemeris, an EphemerisEntryBuilder to aid the creation of the first entry 
+of Ephemeris (which is user defined) and the time step and final time of the propagation.
+* Celestial Body represents a celestial body (planet, asteroid...) that can exert gravitational influence on another body.
+* Ephemeris stores a chronological collection of EphemerisEntry (which stores x, y, z coordinates of position and velocity). 
+* EphemerisEntryBuilder allows defining the initial entry of the Ephemeris (ie the initial position of orbiting body).
+* Additionally, there is a util math class MVector which represents a vector in  the mathematical sense of the word which 
+implements useful operators for linear algebra operations
