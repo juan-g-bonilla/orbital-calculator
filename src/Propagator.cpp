@@ -1,4 +1,6 @@
 #include "Propagator.hpp"
+#include "Enviroment.hpp"
+#include "MVector.hpp"
 #include <cmath>
 #include <iostream>
 

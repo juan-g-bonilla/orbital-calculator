@@ -1,4 +1,9 @@
-#include "Enviroment.hpp"
+#ifndef PROPAGATOR_HPP
+#define PROPAGATOR_HPP
+
+#include <string>
+
+class Enviroment;
 
 class Propagator
 {
@@ -30,3 +35,5 @@ class LeapfrogPropagator : public Propagator
 
     std::string getExitMessage(int) override;
 };
+
+#endif

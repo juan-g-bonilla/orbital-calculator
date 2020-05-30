@@ -1,3 +1,6 @@
+#ifndef CONSOLEHANDLER_HPP
+#define CONSOLEHANDLER_HPP
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -63,3 +66,5 @@ class ConsoleHandler
     std::ostream& output;
     std::map<std::string, Command> commands;
 };
+
+#endif
