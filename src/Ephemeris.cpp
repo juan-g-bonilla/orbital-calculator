@@ -39,12 +39,12 @@ Ephemeris& Ephemeris::operator=(Ephemeris&& source)
     return *this;
 }
 
-size_t Ephemeris::size()
+unsigned int Ephemeris::size()
 {
     return entries.size();
 }
 
-EphemerisEntry&  Ephemeris::at(size_t n)
+EphemerisEntry&  Ephemeris::at(unsigned int n)
 {
     return entries.at(n);
 }
@@ -77,7 +77,7 @@ bool Ephemeris::empty()
     return entries.empty();
 }
 
-size_t Ephemeris::include(EphemerisEntry entry)
+unsigned int Ephemeris::include(EphemerisEntry entry)
 {
     if (empty())
     {
