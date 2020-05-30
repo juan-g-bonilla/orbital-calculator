@@ -4,6 +4,14 @@
 
 using std::pow;
 
+std::string Propagator::getExitMessage(int i)
+{
+    switch(i)
+    {
+        case 0: return "Propagation succesful";
+    }
+}
+
 int LeapfrogPropagator::propagate(Enviroment& env)
 {
     if (env.getCentralBody().getGravitationalParameter() == 0) return 2;
@@ -42,4 +50,15 @@ int LeapfrogPropagator::propagate(Enviroment& env)
     }
 
     return 0;
+}
+
+std::string LeapfrogPropagator::getExitMessage(int i)
+{
+    switch(i)
+    {
+        case 0: return "Propagation succesful";
+        case 1: return "No initial position has been set";
+        case 2: return "Central body has not been defined";
+        case 3: return "Final time or time step have not been set";
+    }
 }

@@ -7,6 +7,10 @@ class Propagator
      *  @return 0 if no error happened during computation
      */  
     virtual int propagate(Enviroment& enviroment) = 0;
+
+    /** @return an user friendly message corresponding to exit code in propagate
+     */
+    virtual std::string getExitMessage(int);
 };
 
 /** Uses the Leapfrog integration method to propagate the orbit.
@@ -23,4 +27,6 @@ class LeapfrogPropagator : public Propagator
      *  @return 3 if final time and time set are set so that t0 >= (tf - dt)
      */ 
     int propagate(Enviroment& enviroment) override;
+
+    std::string getExitMessage(int) override;
 };
