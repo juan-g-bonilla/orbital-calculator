@@ -8,6 +8,11 @@
 #include "MVector.hpp"
 #include "Propagator.hpp"
 
+/** Stores the enviroment central CelestialBody, orbiting body's  Ephemeris, a Propagator 
+ * for the Ephemeris, an EphemerisEntryBuilder to aid the creation of the first entry 
+ * of Ephemeris (which is user defined) and the time step and final time of the propagation.
+ * 
+ */
 class Enviroment
 {
     public:

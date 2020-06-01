@@ -71,6 +71,8 @@ class Command
     std::function<std::string (Enviroment&, std::vector<CommArgument>)> function;
 };
 
+/** Handles user input; command declaration and execution; and console and file output. 
+ */
 class ConsoleHandler
 {
     public:
