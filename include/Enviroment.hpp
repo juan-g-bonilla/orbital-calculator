@@ -50,7 +50,7 @@ class Enviroment
     int propagate();
 
     private:
-    CelestialBody centralBody{0};
+    CelestialBody centralBody;
     Ephemeris ephemeris{};
     EphemerisEntryBuilder builder{};
     std::unique_ptr<Propagator> propagator{new LeapfrogPropagator()};
