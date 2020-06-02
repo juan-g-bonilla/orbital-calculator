@@ -4,6 +4,7 @@
 #include <limits>
 #include <ios>
 #include <fstream>
+#include <cmath>
 
 /* ConsoleHandler */
 ConsoleHandler::ConsoleHandler(Enviroment& env, std::istream& input, std::ostream& output) 
@@ -239,6 +240,22 @@ ConsoleHandler::ConsoleHandler(Enviroment& env, std::istream& input, std::ostrea
             }
 
             return "Gravitational paramater set";
+        });
+
+    emplace("central J", {NUMBER, NUMBER}, "Set Jeffery constant in units of km^(n+3)*s^−2",
+        [](Enviroment& env, std::vector<CommArgument> args) 
+        {   
+            try
+            {
+                int i = (int) args[0].getNumber();
+                env.getCentralBody().setJefferyConstant(i, args[1].getNumber());
+            }
+            catch(std::invalid_argument& ex)
+            {
+                return ex.what();
+            }
+
+            return "Jeffery constant set";
         });
 
     emplace("propagate", {}, "Propagates the orbit",
